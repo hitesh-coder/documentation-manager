@@ -8,6 +8,9 @@
 # Install dependencies
 npm install
 
+# Build th bot
+npm run build
+
 # Run the bot
 npm start
 ```
