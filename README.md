@@ -1,12 +1,15 @@
 # documentation-manager
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A Probot app
+> A GitHub App built with [Probot](https://github.com/probot/probot) to check if docs are updated as pull request is submited and that is to be checked by reviewer
 
 ## Setup
 
 ```sh
 # Install dependencies
 npm install
+
+# Build th bot
+npm run build
 
 # Run the bot
 npm start
