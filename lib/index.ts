@@ -16,7 +16,7 @@ export = (app: Probot) => {
 	// Re-check on dependency updates
 	// app.on("issues.closed", update);
 	// app.on("issues.reopened", update);
-	// app.on("pull_request.reopened", update);
+	app.on("pull_request.reopened", toggle);
 	// app.on("pull_request.closed", update);
 	app.on("pull_request.synchronize", toggle);
 
