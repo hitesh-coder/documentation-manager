@@ -58,6 +58,32 @@ export default async function toggle(context: Context) {
     ? config.docsReadyMessage
     : config.docsNotReadyMessage;
 
+  if (!documentChanged) {
+    const labelsToAdd = ["Docs needs to change"];
+    await context.octokit.issues.addLabels(
+      context.issue({
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
+        issue_number: context.payload.pull_request.number,
+        labels: labelsToAdd,
+      })
+    );
+  } else {
+    try {
+      // Remove it
+      context.log("No dependencies found, removing the label");
+      await context.octokit.issues.removeLabel({
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
+        issue_number: context.payload.pull_request.number,
+        name: "Docs needs to change",
+      });
+    } catch (err) {
+      // Nothing need to be done. Resolves (#14)
+      context.log("The label doesn't exist. It's OK!");
+    }
+  }
+
   await context.octokit.repos.createCommitStatus(
     context.repo({
       sha: pullRequest.head.sha,
@@ -100,12 +126,6 @@ async function isDocumentChanged(context: Context, fileName: Array<string>) {
     repo: context.payload.repository.name,
     pull_number: context.payload.pull_request.number,
   });
-
-  // const commitStat = await context.octokit.rest.repos.getCommit({
-  //   owner: context.payload.repository.owner.login,
-  //   repo: context.payload.repository.name,
-  //   ref: context.payload.pull_request.head.sha,
-  // });
 
   // console.log("commitStat.data.files", commitStat);
   const namesOfFilesChanged: (string | undefined)[] | undefined =
