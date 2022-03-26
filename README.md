@@ -1,6 +1,39 @@
 # documentation-manager
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) to check if docs are updated as pull request is submited and that is to be checked by reviewer
+> A GitHub App built with [Probot](https://github.com/probot/probot) to check if docs are updated as pull request is submited and needs minimum number of reviewer to approve the PR.
+
+## Usage
+1. **[Configure the Github App](https://github.com/apps/documentation-manager)**
+2. Create ```.github/config.yml``` based on following template.
+3. It will wait for docs file to be updated and reviewer to review it before marking them as ready to be merged.
+
+A ```.github/config.yml``` file is required to enable the plugin.
+```yaml
+
+# Configuration for probot-min-reviews - https://github.com/hitesh-coder/documentation-manager
+_extends: .github
+
+# Number of reviews required to mark the pull request as valid
+reviewsUntilReady: 1
+
+# Number of changes in the pull request to start enforcing the reviewsUntilReady rule
+changesThreshold: 100
+
+# Message to display when the commit status passes
+reviewReadyMessage: 'No pending reviews'
+docsReadyMessage: "Document changed"
+
+# Message to display when the commit status fails
+reviewNotReadyMessage: 'Pending review approvals'
+docsNotReadyMessage: "Please change document"
+
+#list of documents needs to change
+listOfDocFiles: ["docs.md"]
+
+# Status to set the commit to when waiting for reviews
+# 'failure, error, and pending' are the suggested options
+notReadyState: 'pending'
+```
 
 ## Setup
 
