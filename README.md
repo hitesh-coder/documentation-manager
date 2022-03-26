@@ -1,6 +1,6 @@
 # documentation-manager
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) to check if docs are updated as pull request is submited and needs minimum number of reviewer to approve the PR.
+> A GitHub App built with [Probot](https://github.com/probot/probot) to enforce docs to be updated as pull request is submited and needs minimum number of reviewer to approve the PR.
 
 
 <img width="908" alt="Screenshot 2022-03-26 at 10 37 15 AM" src="https://user-images.githubusercontent.com/58116679/160225624-e74291de-f7e8-46b1-8817-b6f2de70ddec.png">
